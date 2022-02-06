@@ -30,9 +30,9 @@ def card_index(src):
     # cv2.imwrite('thresh.png', thresh)
     # cv2.imwrite('test.png', canvas)
     cards_in_image = (len(contours))
-    if(cards_in_image==6):
+    if(int(cards_in_image%3)==0 and int(cards_in_image/3)>1):
         cards_in_image=3
-    elif(cards_in_image==7):
+    elif(int(cards_in_image%3)==1):
         cards_in_image=4
     print(f"There are {cards_in_image} cards in this picture.")
 
@@ -85,8 +85,8 @@ while True:
             message_content = message.find_element(By.ID, str(message_id).replace("chat-messages-", "message-content-"))
             # print(str(message_content.get_property("innerHTML")))  
             if('@username</span>, you must' in str(message_content.get_property("innerHTML"))):
-                print("Waiting for 1 minute...")
-                time.sleep(60) 
+                print("Waiting for 15 seconds...")
+                time.sleep(15) 
             if('@username</span> took' in str(message_content.get_property("innerHTML")) or '@username</span> fought' in str(message_content.get_property("innerHTML"))):
             # if('@username' in str(message_content.get_property("innerHTML"))):
                 print("Hit")
@@ -104,7 +104,7 @@ while True:
                 #Find appropriate reaction
                 reaction = driver.find_elements(By.XPATH, f"//div[@id='{accessories}']/div[@class='container-3Sqbyb']/div/div/button")
                 print(f"Clicking the button!")
-                time.sleep(2)
+                time.sleep(1.1)
                 click = list(reaction)[cindex].click()
 
             except:
